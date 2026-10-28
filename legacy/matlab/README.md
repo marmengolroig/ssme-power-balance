@@ -2,7 +2,7 @@
 
 | Folder | Content |
 |---|---|
-| `original/` | The 13 files exactly as received (`20250113_SSME_Assignment.zip`). Kept for reference only. |
+| `original/` | The 13 files exactly as delivered in a MSc coursework project (`20250113_SSME_Assignment.zip`). Kept for reference only. |
 | `fixed/` | The corrected version. Every change is tagged `FIX(n)` with the number used in [docs/CODE_REVIEW.md](../../docs/CODE_REVIEW.md). |
 | `results/` | Output of `fixed/export_results.m`, used by `tests/test_matlab_crosscheck.py`. |
 

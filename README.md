@@ -141,5 +141,4 @@ thermochemical database and the NIST Chemistry WebBook; full references are in
   every data file carries its own provenance (`ssme.thermo.hgs.data_source()`, `ssme.thermo.nfp.data_source(fluid)`).
 - The SSME reference data come from the course assignment.
 - This repository: [MIT licence](LICENSE). The ported HGS and INIST code and data keep their CC0 dedication.
-- The reference operating point in `ssme_reference.yaml` comes from the course assignment; check with the course
-  before making the repository public.
+- The reference operating point in `ssme_reference.yaml` comes from the course assignment.
