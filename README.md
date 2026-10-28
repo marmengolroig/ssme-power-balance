@@ -1,4 +1,4 @@
-# ssme-cycle
+# SSME power balance (`ssme-cycle`)
 
 A steady-state power-balance model of the **Space Shuttle Main Engine** (staged-combustion LH2/LOX cycle), with a
 **verification & validation** suite against the reference operating point of the 2025 SSME assignment.
@@ -20,7 +20,7 @@ isolated / pH2 / nfp: 88 pass, 4 fail, 15 info
 ## Quick start
 
 ```bash
-git clone <this repo> && cd ssme-cycle
+git clone <this repo> && cd ssme-power-balance
 python -m venv .venv && source .venv/bin/activate      # Windows: .venv\Scripts\activate
 pip install -e ".[dev]"            # add ,coolprop for the independent property cross-check
 pytest                             # the whole V&V matrix (~3 s)
@@ -140,4 +140,6 @@ thermochemical database and the NIST Chemistry WebBook; full references are in
   [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); the commits used are in `src/ssme/thermo/data/SOURCES.json`, and
   every data file carries its own provenance (`ssme.thermo.hgs.data_source()`, `ssme.thermo.nfp.data_source(fluid)`).
 - The SSME reference data come from the course assignment.
-- **No licence has been chosen for this repository yet.** Add one (e.g. MIT) before making it public.
+- This repository: [MIT licence](LICENSE). The ported HGS and INIST code and data keep their CC0 dedication.
+- The reference operating point in `ssme_reference.yaml` comes from the course assignment; check with the course
+  before making the repository public.
