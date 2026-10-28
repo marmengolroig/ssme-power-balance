@@ -28,6 +28,7 @@ python -m ssme                     # validation report (Markdown) on stdout
 python -m ssme --mode chained      # propagate states through the cycle
 python -m ssme --backend coolprop  # CoolProp instead of the NIST tables
 python -m ssme --hydrogen H2       # normal hydrogen, as the original code (12 failures)
+python -m ssme --format html -o cycle_map.html   # interactive cycle map
 ```
 
 From Python:
@@ -39,6 +40,20 @@ print(res.check("K41 HPOT", "T(S51)").computed)  # 760.88 K (reference 760.9 K)
 for c in res.failed:
     print(c.item, c.quantity, c.computed, c.reference, c.note)
 ```
+
+## Cycle map
+
+`python -m ssme --format html -o cycle_map.html` writes a single self-contained page with a schematic of the whole
+cycle. Pipes are coloured by fluid and their width grows with mass flow; every component and station opens a panel
+with its states and validation checks. Two switches change what the map shows:
+
+- **Isolated components / Chained cycle**: the two run modes (both are computed and embedded in the page).
+- **Python model / Original MATLAB**: judges either this model or the original scripts against the same acceptance
+  criteria. The original logic (normal hydrogen, `P_in*(2-deltaP)`, the mass-flow typos, the HPOT as pure hydrogen,
+  imposed combustor temperatures...) is re-created with the Python property layer in `ssme/legacy.py`; MATLAB itself
+  was not run. In that view, parts the scripts did not model are faded and imposed results are dashed.
+
+The page works offline; it only fetches the Barlow web font when a connection is available.
 
 ## What was wrong in the MATLAB version (summary)
 
@@ -67,6 +82,8 @@ src/ssme/
   cycle.py                 the SSME cycle, isolated & chained modes, validation checks
   data/ssme_reference.yaml reference stations, components, acceptance criteria, data issues
   report.py, __main__.py   Markdown/CSV reports, command line
+  cycle_map.py, templates/ interactive HTML cycle map (python -m ssme --format html)
+  legacy.py                what the original MATLAB scripts compute, re-created with the port
 tests/                     verification & validation suite (pytest)
 docs/                      CODE_REVIEW, VV_PLAN, MODEL, generated validation reports
 legacy/matlab/original/    the MATLAB scripts as received

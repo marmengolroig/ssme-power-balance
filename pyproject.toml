@@ -26,6 +26,7 @@ ssme = "ssme.__main__:main"
 where = ["src"]
 
 [tool.setuptools.package-data]
+"ssme" = ["templates/*.html"]
 "ssme.data" = ["*.yaml"]
 "ssme.thermo" = ["data/*.json", "data/*.npz"]
 
