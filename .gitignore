@@ -16,3 +16,8 @@ htmlcov/
 *.asv
 *.mex*
 slprj/
+
+# generated outputs (python -m ssme ... -o <file>) at the repository root
+/*.csv
+/report*.md
+/cycle_map*.html

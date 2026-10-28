@@ -6,8 +6,8 @@ Units throughout: P [bar], T [K], ṁ [kg/s], h [kJ/kg], power and heat [kW].
 
 | Module | What it does | Origin |
 |---|---|---|
-| `nfp.py` | Real-fluid properties of para-H2, normal H2 and O2 from NIST Webbook isobars. Linear interpolation in T on the two bracketing isobars (split at the phase change), then linear in p. Inverses by bracketed root finding. | Port of INIST `NFP.m` (CC0), same data |
-| `hgs.py` | NASA 7-coefficient polynomials (Burcat), ideal-gas mixtures, Gibbs-minimisation equilibrium (Gordon–McBride element-potential method), (H,p) and (S,p) problems | Port of HGS (CC0), same data and gas constant |
+| `nfp.py` | Real-fluid properties of para-H2, normal H2 and O2 from NIST Webbook isobars. Linear interpolation in T on the two bracketing isobars (split at the phase change), then linear in p. Inverses by bracketed root finding. | Port of INIST `NFP.m` by M. Soria, C. Fuster and L. Frezza (ESEIAAT-UPC, CC0), same data |
+| `hgs.py` | NASA 7-coefficient polynomials (Burcat), ideal-gas mixtures, Gibbs-minimisation equilibrium (Gordon–McBride element-potential method), (H,p) and (S,p) problems | Port of HGS by C. Fuster, M. Soria, A. Miró et al. (ESEIAAT-UPC, CC0), same data and gas constant |
 | `fluids.py` | `RealFluid` (backend `nfp` or `coolprop`) and the offset that puts real-fluid enthalpies on the NASA scale | New (replaces `getDeltah.m`) |
 | `coolprop_backend.py` | Optional CoolProp access (Python package or shared library) | New |
 

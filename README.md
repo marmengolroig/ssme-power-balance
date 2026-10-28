@@ -103,9 +103,24 @@ See [docs/VV_PLAN.md](docs/VV_PLAN.md) for the requirements and traceability mat
 `.github/workflows/ci.yml` runs ruff and the test suite on Python 3.10–3.13, plus a job with CoolProp installed
 for the cross-check.
 
+## Acknowledgements
+
+The thermodynamic layer of this package is a Python port of two MATLAB libraries from ESEIAAT, Universitat Politècnica
+de Catalunya, and uses their data:
+
+- **[HGS](https://github.com/ManelSoria/HGS)** (chemical equilibrium and NASA polynomials), by Caleb Fuster, Manel Soria,
+  Arnau Miró et al.;
+- **[INIST / NFP](https://github.com/ManelSoria/INIST)** (real-fluid NIST tables), by Manel Soria, Caleb Fuster and
+  Lorenzo Frezza.
+
+Thanks to their authors for releasing them into the public domain. The underlying data come from the Burcat
+thermochemical database and the NIST Chemistry WebBook; full references are in
+[THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
 ## Data sources and licences
 
 - NIST fluid tables (via INIST) and Burcat NASA polynomials (via HGS): both projects are CC0. See
-  [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); the commits used are in `src/ssme/thermo/data/SOURCES.json`.
+  [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md); the commits used are in `src/ssme/thermo/data/SOURCES.json`, and
+  every data file carries its own provenance (`ssme.thermo.hgs.data_source()`, `ssme.thermo.nfp.data_source(fluid)`).
 - The SSME reference data come from the course assignment.
 - **No licence has been chosen for this repository yet.** Add one (e.g. MIT) before making it public.

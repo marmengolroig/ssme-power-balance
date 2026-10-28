@@ -1,6 +1,7 @@
 """Real-fluid properties from tabulated NIST data: a Python port of INIST's ``NFP``.
 
-The original MATLAB function (``NFP.m``, M. Soria, C. Fuster, L. Frezza, ESEIAAT-UPC, CC0)
+The original MATLAB function (``NFP.m``, M. Soria, C. Fuster, L. Frezza, ESEIAAT-UPC, CC0,
+https://github.com/ManelSoria/INIST)
 interpolates NIST Webbook isobars:
 
 1. linear interpolation in temperature along the two isobars that bracket ``p``
@@ -23,6 +24,7 @@ states.  ``tests/test_nfp.py`` quantifies it against CoolProp when CoolProp is a
 
 from __future__ import annotations
 
+import json
 from dataclasses import dataclass, field
 from functools import cache
 from pathlib import Path
@@ -230,6 +232,12 @@ def NFP(fluid: str, prop: str, *args: float) -> float:
     if key == "maxt":
         return tab.tmax
     raise NFPError(f"Unknown property {prop!r}")
+
+
+def data_source(fluid: str) -> dict:
+    """Provenance of a bundled table (authors, repository, commit, licence, origin of the data)."""
+    with np.load(DATA_DIR / f"nfp_{fluid}.npz") as npz:
+        return json.loads(str(npz["source"]))
 
 
 def h_pt(fluid: str, p: float, T: float) -> float:

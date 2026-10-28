@@ -1,4 +1,14 @@
 {
+ "_source": {
+  "project": "HGS - Hot Gas Simulator (MATLAB)",
+  "authors": "C. Fuster, M. Soria, A. Mir\u00f3 - ESEIAAT, Universitat Polit\u00e8cnica de Catalunya",
+  "url": "https://github.com/ManelSoria/HGS",
+  "license": "CC0-1.0",
+  "data_origin": "A. Burcat and B. Ruscic, Third Millennium Ideal Gas and Condensed Phase Thermochemical Database for Combustion with Updates from Active Thermochemical Tables, ANL-05/20 and TAE 960, Argonne National Laboratory / Technion, 2005",
+  "file": "HGSdata.mat",
+  "commit": "55b40f4b451675065a7d46dccbe8450f5d25c164",
+  "converted_with": "tools/convert_thermo_data.py (subset of species)"
+ },
  "H": {
   "hgs_index": 2198,
   "state": "G",

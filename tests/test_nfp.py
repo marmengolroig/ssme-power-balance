@@ -72,3 +72,12 @@ def test_isobar_spacing_above_300_bar_is_coarse():
     """Documented limitation: 100-bar spacing above 300 bar (SSME states sit at 330-560 bar)."""
     P = load_table("pH2").P
     assert list(P[-5:]) == [300.0, 400.0, 500.0, 600.0, 700.0]
+
+
+@pytest.mark.parametrize("fluid", FLUIDS)
+def test_data_files_carry_credit(fluid):
+    """Each NIST table keeps its provenance (authors, repository, licence, original data) inside the file."""
+    src = nfp.data_source(fluid)
+    assert "Soria" in src["authors"] and "Fuster" in src["authors"] and "Frezza" in src["authors"]
+    assert src["url"] == "https://github.com/ManelSoria/INIST" and src["license"] == "CC0-1.0"
+    assert "NIST Chemistry WebBook" in src["data_origin"] and src["file"] == f"DatabaseNFP/{fluid}.mat"

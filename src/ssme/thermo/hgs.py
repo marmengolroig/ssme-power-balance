@@ -1,6 +1,6 @@
 """Ideal-gas mixture thermochemistry: a Python port of the parts of HGS used by the SSME model.
 
-HGS (C. Fuster, M. Soria, A. Miro, ESEIAAT-UPC, CC0) evaluates NASA 7-coefficient polynomials
+HGS (C. Fuster, M. Soria, A. Miró, ESEIAAT-UPC, CC0, https://github.com/ManelSoria/HGS) evaluates NASA 7-coefficient polynomials
 (Burcat database) and finds chemical equilibrium by minimising the Gibbs energy with ``fmincon``.
 
 Here:
@@ -79,6 +79,8 @@ def _database() -> dict[str, Species]:
     raw = json.loads(DATA_FILE.read_text())
     db = {}
     for name, d in raw.items():
+        if name.startswith("_"):  # metadata ("_source": provenance and credit of the data)
+            continue
         tmin, tmid, tmax = d["T_limits"]
         db[name] = Species(name, d["Mm"], tmin, tmid, tmax, tuple(d["low"]), tuple(d["high"]), d["elements"])
     return db
@@ -89,6 +91,11 @@ def species(name: str) -> Species:
         return _database()[name]
     except KeyError as exc:
         raise HGSError(f"Species {name!r} not in the bundled database ({sorted(_database())})") from exc
+
+
+def data_source() -> dict:
+    """Provenance of the bundled NASA-polynomial data (authors, repository, commit, licence, origin)."""
+    return json.loads(DATA_FILE.read_text())["_source"]
 
 
 def molar_mass(name: str) -> float:

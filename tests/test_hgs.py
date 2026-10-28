@@ -157,3 +157,12 @@ def test_sp_equilibrium_conserves_entropy():
 def test_temperature_outside_polynomial_range_raises():
     with pytest.raises(hgs.HGSError):
         hgs.species("H2").h(150.0)
+
+
+def test_data_file_carries_credit():
+    """The NASA-polynomial data keep their provenance (authors, repository, licence) inside the file."""
+    src = hgs.data_source()
+    assert "Soria" in src["authors"] and "Fuster" in src["authors"] and "Miró" in src["authors"]
+    assert src["url"] == "https://github.com/ManelSoria/HGS" and src["license"] == "CC0-1.0"
+    assert "Burcat" in src["data_origin"]
+    assert not any(name.startswith("_") for name in hgs._database())  # metadata is not a species
