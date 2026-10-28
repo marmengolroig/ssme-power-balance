@@ -1,0 +1,3 @@
+# keep the MATLAB files exactly as received (CRLF line endings)
+legacy/matlab/original/*.m -text
+*.npz binary

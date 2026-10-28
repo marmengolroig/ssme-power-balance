@@ -1,0 +1,12 @@
+{
+  "HGS": {
+    "url": "https://github.com/ManelSoria/HGS",
+    "commit": "55b40f4b451675065a7d46dccbe8450f5d25c164",
+    "license": "CC0-1.0"
+  },
+  "INIST": {
+    "url": "https://github.com/ManelSoria/INIST",
+    "commit": "50931d064cb1d551a1a0f2f9965a5bdcd9b4fc45",
+    "license": "CC0-1.0"
+  }
+}

@@ -1,0 +1,125 @@
+# SSME reference operating point used by the assignment.
+#
+# All numbers were transcribed from the original MATLAB scripts (legacy/matlab/original/main.m and
+# mainLOX.m). Where the scripts contained an obvious typo, the corrected value is used here and the
+# original value is recorded under `data_issues` at the bottom of the file.
+#
+# Units: P [bar], T [K], m_dot [kg/s], rho [kg/m^3], W and Q [kW], v [m/s].
+# `fluid`: H2 (hydrogen; the model chooses para or normal H2), O2, or gas (ideal-gas mixture).
+# Values that are model *inputs* and values that are *reference results* are both listed; which
+# is which depends on the run mode (see ssme/cycle.py).
+
+meta:
+  title: SSME power balance - reference stations
+  source: "Assignment data (20250113_SSME_Assignment), station/component numbering as in the original scripts"
+  hydrogen_table: pH2   # pH2 = para-hydrogen (default, see docs), H2 = normal hydrogen
+
+stations:
+  # ------------------------------------------------------------------ fuel (hydrogen) side
+  S31:  {fluid: H2, m_dot: 73.22, P: 2.07,   T: 20.6,  rho: 70.57, note: "LPFP K25 inlet (from tank K24)"}
+  S32:  {fluid: H2, m_dot: 73.22, P: 19.50,  T: 22.7,  rho: 70.52, note: "LPFP K25 outlet / HPFP K26 inlet"}
+  S33:  {fluid: H2, m_dot: 73.22, P: 486.49, T: 57.3,  rho: 80.32, note: "HPFP K26 outlet"}
+  S58:  {fluid: H2, m_dot: 73.22, P: 463.32, T: 59.1,  rho: 78.52, note: "after main fuel valve K64"}
+  S34:  {fluid: H2, m_dot: 57.76, note: "splitter K27 -> nozzle-coolant circuit"}
+  S41:  {fluid: H2, m_dot: 15.46, note: "splitter K27 -> MCC coolant jacket (73.22 - 57.76)"}
+  S87:  {fluid: H2, m_dot: 28.88, P: 463.32, T: 59.1,  rho: 78.58, note: "splitter K35 -> nozzle coolant HX K28"}
+  S88:  {fluid: H2, m_dot: 28.88, note: "splitter K35 -> coolant control valve K36"}
+  S36:  {fluid: H2, m_dot: 28.88, P: 431.40, T: 257.8, rho: 30.97, note: "nozzle coolant HX K28 outlet"}
+  S89:  {fluid: H2, m_dot: 28.88, P: 431.40, T: 61.4,  rho: 75.95, note: "coolant control valve K36 outlet"}
+  S90:  {fluid: H2, m_dot: 57.76, P: 431.40, T: 163.3, note: "mixer K37 outlet (rho in the script was copied from S36, see data_issues)"}
+  S43:  {fluid: H2, m_dot: 15.46, P: 345.50, T: 252.8, rho: 26.54, note: "MCC coolant outlet / LPFT K34 inlet"}
+  S44:  {fluid: H2, m_dot: 15.46, P: 261.36, T: 244.8, rho: 21.76, note: "LPFT K34 outlet"}
+  S38:  {fluid: H2, m_dot: 37.82, P: 431.40, T: 163.3, note: "S90 branch to fuel preburner K45"}
+  S39:  {fluid: H2, m_dot: 19.94, P: 431.40, T: 163.3, note: "S90 branch to oxidizer preburner fuel valve K38"}
+  S40:  {fluid: H2, m_dot: 19.94, P: 387.25, note: "after K38, to oxidizer preburner K40"}
+  S72:  {fluid: H2, m_dot: 1.90,  P: 248.21, T: 244.8, note: "H2 to mixer K49 (rho in the script copied from S44, see data_issues)"}
+  S71:  {fluid: H2, m_dot: 0.47,  P: 248.21, T: 244.8, note: "H2 to mixer K48 (rho in the script copied from S44, see data_issues)"}
+  S79:  {fluid: H2, m_dot: 12.75, P: 248.21, T: 244.8, note: "H2 to MCC (S77). P and T not given in the scripts: assumed equal to S71/S72"}
+  S55:  {fluid: gas, m_dot: 74.71, P: 391.47, T: 1105.6, note: "fuel preburner K45 outlet / HPFT inlet"}
+  S56:  {fluid: gas, m_dot: 74.71, P: 248.21, T: 1008.9, rho: 11.78, note: "HPFT outlet"}
+  S59:  {fluid: gas, m_dot: 76.61, P: 248.21, T: 975.0,  rho: 11.91, note: "mixer K49 outlet (fuel-side hot gas to MCC)"}
+  S50:  {fluid: gas, m_dot: 33.50, P: 387.25, T: 833.33, rho: 18.93, note: "oxidizer preburner K40 outlet / HPOT K41 inlet"}
+  S51:  {fluid: gas, m_dot: 33.50, P: 251.43, T: 760.9,  rho: 13.46, note: "HPOT K41 outlet"}
+  S53:  {fluid: gas, m_dot: 33.50, P: 248.21, T: 759.5,  rho: 13.31, note: "mixer K48 gas inlet"}
+  S54:  {fluid: gas, m_dot: 33.97, P: 248.21, T: 748.2,  rho: 13.39, note: "mixer K48 outlet (ox-side hot gas to MCC)"}
+  S62:  {fluid: gas, m_dot: 511.46, P: 225.10, T: 3613.0, note: "main combustion chamber K50"}
+  S63:  {fluid: gas, m_dot: 511.46, P: 219.70, T: 3683.6, note: "MCC end / nozzle inlet"}
+  S68:  {fluid: gas, m_dot: 511.46, P: 0.19243, T: 1139.3, rho: 0.02874, v: 4351.2, M: 4.734, note: "nozzle exit (exit pressure from S86)"}
+  # ------------------------------------------------------------------ oxidizer (LOX) side
+  S11:  {fluid: O2, m_dot: 439.34, P: 6.89,   T: 91.1,  rho: 1137.99, note: "LPOP K10 inlet"}
+  S12:  {fluid: O2, m_dot: 439.34, P: 29.70,  T: 92.3,  rho: 1137.38, note: "LPOP K10 outlet"}
+  S162: {fluid: O2, m_dot: 83.06,  P: 29.70,  T: 107.8, rho: 1056.78, note: "LPOT discharge after K11, to mixer K12"}
+  S13:  {fluid: O2, m_dot: 522.40, P: 29.70,  T: 94.8,  rho: 1125.00, note: "mixer K12 outlet / HPOP K13 inlet"}
+  S14:  {fluid: O2, m_dot: 522.40, P: 330.35, T: 108.9, rho: 1127.96, note: "HPOP K13 outlet"}
+  S15:  {fluid: O2, m_dot: 83.06,  P: 330.35, T: 108.9, note: "splitter K14 -> LPOT K15"}
+  S17:  {fluid: O2, m_dot: 439.34, P: 330.35, T: 108.9, note: "splitter K14 -> K66"}
+  S160: {fluid: O2, m_dot: 83.06,  P: 29.70,  T: 107.8, rho: 1056.78, note: "LPOT K15 outlet"}
+  S29:  {fluid: O2, m_dot: 438.59, P: 330.35, T: 108.9, note: "splitter K66 -> K16"}
+  S74:  {fluid: O2, m_dot: 0.75,   P: 330.35, T: 108.9, note: "splitter K66 -> oxidizer HX K67"}
+  S18:  {fluid: O2, m_dot: 388.13, P: 330.35, T: 108.9, note: "splitter K16 -> main injector (S19)"}
+  S20:  {fluid: O2, m_dot: 50.46,  P: 330.35, T: 108.9, note: "splitter K16 -> preburner boost pump K18"}
+  S21:  {fluid: O2, m_dot: 50.46,  P: 558.71, T: 116.8, rho: 1141.64, note: "PBP K18 outlet"}
+  S80:  {fluid: O2, m_dot: 0.75,   P: 285.53, T: 507.8, rho: 199.71, note: "oxidizer HX K67 outlet"}
+  S69:  {fluid: O2, m_dot: 0.75,   P: 2.49,   T: 494.0, rho: 1.94, note: "GOX tank pressurant after valve K70"}
+  S22:  {fluid: O2, m_dot: 13.56,  P: 558.71, T: 116.8, note: "splitter K19 -> OPB oxidizer valves K61, K20"}
+  S24:  {fluid: O2, m_dot: 36.89,  P: 558.71, T: 116.8, note: "splitter K19 -> fuel preburner (S25)"}
+  S23:  {fluid: O2, m_dot: 13.56,  P: 387.25, note: "after K61 + K20, to oxidizer preburner K40 (P = S50)"}
+
+components:
+  # fuel side
+  K25:  {type: pump,    inlet: S31, outlet: S32, eta: 0.650, W_ref: 2755.0,  note: LPFP}
+  K26:  {type: pump,    inlet: S32, outlet: S33, eta: 0.730, W_ref: 59790.0, note: HPFP}
+  K64:  {type: valve,   inlet: S33, outlet: S58, note: "main fuel valve (+ ducts)"}
+  K28:  {type: hx,      inlet: S87, outlet: S36, Q: 93130.0, PR: 1.074, note: "nozzle coolant circuit (heat from K53)"}
+  K36:  {type: valve,   inlet: S88, outlet: S89, note: "coolant control valve"}
+  K37:  {type: mixer,   inlets: [S36, S89], outlet: S90}
+  MCCJ: {type: hx,      inlet: S41, outlet: S43, Q: 47770.0, note: "MCC coolant jacket (heat from K52); not modelled in the original scripts"}
+  K34:  {type: turbine, inlet: S43, outlet: S44, eta: 0.520, W_ref: -2755.0, note: LPFT}
+  K38:  {type: valve,   inlet: S39, outlet: S40, PR: 1.114, note: "OPB fuel valve"}
+  K45:  {type: burner,  inlets: [S38, S24], outlet: S55, note: "fuel preburner (FPB)"}
+  HPFT: {type: gas_turbine, inlet: S55, outlet: S56, W_ref: -59790.0, note: "HP fuel turbine (not modelled in the original scripts); W_ref from the HPFTP shaft balance"}
+  K49:  {type: gas_mixer, inlets: [S56, S72], outlet: S59}
+  K40:  {type: burner,  inlets: [S40, S23], outlet: S50, note: "oxidizer preburner (OPB)"}
+  K41:  {type: gas_turbine, inlet: S50, outlet: S51, eta: 0.780, W_ref: -21770.0, note: HPOT}
+  K48:  {type: gas_mixer, inlets: [S53, S71], outlet: S54}
+  K50:  {type: burner,  inlets: [S59, S54, S79, S18], outlet: S63, note: "main combustion chamber"}
+  K52:  {type: heat,    Q: 47770.0, note: "heat to the MCC coolant (taken from the chamber gas)"}
+  K53:  {type: heat,    Q: 93130.0, note: "heat to the nozzle coolant (taken from the nozzle gas)"}
+  NOZ:  {type: nozzle,  inlet: S63, outlet: S68}
+  # oxidizer side
+  K10:  {type: pump,    inlet: S11, outlet: S12, eta: 0.630, W_ref: 1396.0,  note: LPOP}
+  K12:  {type: mixer,   inlets: [S12, S162], outlet: S13}
+  K13:  {type: pump,    inlet: S13, outlet: S14, eta: 0.670, W_ref: 20510.0, note: HPOP}
+  K15:  {type: turbine, inlet: S15, outlet: S160, eta: 0.620, W_ref: -1396.0, note: "LPOT (hydraulic)"}
+  K18:  {type: pump,    inlet: S20, outlet: S21, eta: 0.800, W_ref: 1263.0,  note: "preburner boost pump"}
+  K67:  {type: hx,      inlet: S74, outlet: S80, Q: 405.1, PR: 1.157, note: "oxidizer heat exchanger (GOX pressurant)"}
+  K70:  {type: valve,   inlet: S80, outlet: S69, note: "pressurant valve (2.49 bar outlet)"}
+  K61:  {type: valve,   inlet: S22, outlet: S26, PR: 1.182}
+  K20:  {type: valve,   inlet: S26, outlet: S23, PR: 1.221}
+
+shafts:
+  LPFTP: {pumps: [K25], turbines: [K34]}
+  HPFTP: {pumps: [K26], turbines: [HPFT]}
+  LPOTP: {pumps: [K10], turbines: [K15]}
+  HPOTP: {pumps: [K13, K18], turbines: [K41]}
+
+# Proposed acceptance criteria for the validation checks (edit to suit the assignment).
+acceptance:
+  T_abs_cryogenic: 2.0     # K, for reference temperatures below 200 K
+  T_rel: 0.01              # relative, for reference temperatures >= 200 K
+  W_rel: 0.03              # relative, pump/turbine power
+  P_rel: 0.005             # relative, pressures computed from pressure ratios
+  rho_rel: 0.005           # relative, densities from the property model
+  v_rel: 0.01              # nozzle exit velocity
+  M_rel: 0.02              # nozzle exit Mach number
+  m_dot_abs: 0.02          # kg/s, mass-balance residuals (data are given to 0.01 kg/s)
+
+data_issues:
+  - {where: "S21.m_dot", original: 50.16, used: 50.46, reason: "S20 = 50.46 feeds K18, and S22 + S24 = 13.56 + 36.89 = 50.45"}
+  - {where: "S40.m_dot", original: 19.34, used: 19.94, reason: "S39 = 19.94 feeds K38, and S51 = 33.50 = 19.94 + 13.56"}
+  - {where: "S90.rho",   original: 30.97, used: null,  reason: "copied from S36; para-H2 at 431.4 bar / 163.3 K has rho ~ 43.7 kg/m^3"}
+  - {where: "S71.rho, S72.rho", original: 21.76, used: null, reason: "copied from S44 (261.36 bar); para-H2 at 248.21 bar / 244.8 K has rho ~ 20.85 kg/m^3"}
+  - {where: "HPFT.W_ref", original: null, used: -59790.0, reason: "not in the scripts; taken from the HPFTP shaft balance (= -K26.W_ref), so it inherits K26's inconsistency"}
+  - {where: "K26.W_ref",  original: 59790.0, used: 59790.0, reason: "3.3 % larger than m*dh between the reference states S32 and S33 (57.8 MW); possibly includes mechanical losses"}
+  - {where: "S162.rho",  original: 1056.87, used: 1056.78, reason: "S162 defined twice with two different densities; S160 also uses 1056.78"}
+  - {where: "K70 'deltaP' = 1.991", original: 1.991, used: "P_out = 2.49 bar", reason: "1.991 was tuned so that P_in*(2-1.991) ~ 2.49 bar; as a true ratio it is 285.53/2.49 = 114.7"}

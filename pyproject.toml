@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ssme-cycle"
+version = "0.1.0"
+description = "Steady-state power-balance model of the Space Shuttle Main Engine with a verification and validation suite"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "numpy>=1.23",
+    "scipy>=1.9",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+coolprop = ["CoolProp>=6.6"]
+dev = ["pytest>=7.4", "ruff>=0.5"]
+
+[project.scripts]
+ssme = "ssme.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+"ssme.data" = ["*.yaml"]
+"ssme.thermo" = ["data/*.json", "data/*.npz"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+markers = [
+    "coolprop: cross-verification against CoolProp (skipped when CoolProp is not installed)",
+    "slow: longer-running checks",
+]
+
+[tool.ruff]
+line-length = 135
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E741", "B905"]  # E741: "l" = number of elements (CEA notation); B905: zip(strict=) not needed
